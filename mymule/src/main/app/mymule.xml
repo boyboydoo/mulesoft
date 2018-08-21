@@ -19,7 +19,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="get:/v1/health:mymuleFlow">
         <http:listener config-ref="httpListenerConfig" path="/api/v1/health" doc:name="HTTP"/>
         <set-payload value="{
-&quot;message&quot;:&quot;Good health&quot;ha ha ha
+&quot;message&quot;:&quot;Good health&quot;ha ha ha Kiran
 }" doc:name="Set Payload"/>
     </flow>
 

@@ -24,7 +24,7 @@
         <configuration>
           <muleVersion>${mule.version}</muleVersion>
           <deploymentType>cloudhub</deploymentType>
-          <applicationName>${artifactId}</applicationName>
+          <applicationName>mymule</applicationName>
           <username>kgwy</username>
           <password>Welcome123</password>
           <workerType>Micro</workerType>

@@ -28,7 +28,7 @@
         <version>2.0</version>
         <extensions>true</extensions>
         <configuration>
-          <muleVersion>3.9</muleVersion>
+          <muleVersion>3.9.0</muleVersion>
           <deploymentType>cloudhub</deploymentType>
           <username>kgwy</username>
           <password>Welcome123</password>

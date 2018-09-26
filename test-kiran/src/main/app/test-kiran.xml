@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
+    <objectstore:config name="ObjectStore__Connector" partition="test_store" entryTtl="60" expirationInterval="60" maxEntries="100" doc:name="ObjectStore: Connector" objectStore-ref="_defaultInMemoryObjectStore"/>
+    
+    <flow name="Object-Store-Store-Flow">
+        <http:listener config-ref="HTTP_Config_Domain_Frasier" path="/store" doc:name="HTTP" />
+        <logger level="INFO" message="Adding language and type to Object store" doc:name="Logger" />
+        <objectstore:store config-ref="ObjectStore__Connector" key="language" value-ref="#['Java Language']" doc:name="ObjectStore"/>
+        <objectstore:store config-ref="ObjectStore__Connector" key="type" value-ref="#['Programming']" doc:name="ObjectStore" />
+        <set-payload value="language and type added to Object store" doc:name="Set Payload"/>
+    </flow>
+    <flow name="Object-Store-Retrieveall-Flow">
+        <http:listener config-ref="HTTP_Config_Domain_Frasier" path="/retrieveall" doc:name="HTTP" />
+        <!-- <objectstore:all-keys config-ref="ObjectStore" doc:name="ObjectStore" /> -->
+        <objectstore:retrieve config-ref="ObjectStore__Connector" doc:name="ObjectStore" key="language" />
+        <object-to-string-transformer doc:name="Object to String" />
+    </flow>
+</mule>
